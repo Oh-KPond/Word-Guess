@@ -7,6 +7,12 @@ class Word
     @random_word = @words_array.sample
     return random_word
   end
+  
+  def split
+    @letters_array = @random_word.split(//)
+    return letters_array
+  end
+
 end
 
 class Letter

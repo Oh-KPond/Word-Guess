@@ -1,6 +1,8 @@
 class Word
-  def initialize
+  def initialize(words_array)
+    @words_array = words_array
   end
+
 end
 
 class Letter

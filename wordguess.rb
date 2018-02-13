@@ -38,9 +38,21 @@ class Letter
 end
 
 class Art
-  def initialize(argument)
-    @argument = argument
+  attr_accessor :art
+
+  def initialize
+    @art = art
   end
+
+  def print_art
+    print_art =
+      "|\\    _,,,---,,_
+      /,`.-'`'    -.  ;-;;,_
+      |,4-  ) )-,_..;\\(  `'-'
+      '---''(_/--'  `-'\\_)"
+    return print_art
+  end
+
 end
 
 def guess(word)
@@ -58,8 +70,8 @@ end
 
 my_game = Game.new(["ampers","octos","code","ada"])
 
-
-
+our_art = Art.new
+print our_art.print_art
 
 puts "\nWelcome to our Don't Wake the Cat Guessing Game!"
 puts "Can you guess my word before the cat wakes up?"

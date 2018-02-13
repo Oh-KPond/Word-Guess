@@ -7,7 +7,7 @@ class Word
     @random_word = @words_array.sample
     return random_word
   end
-  
+
   def split
     @letters_array = @random_word.split(//)
     return letters_array
@@ -26,3 +26,24 @@ class Art
     @argument = argument
   end
 end
+
+def guess
+  # start guess loop
+  print "Please guess a letter: "
+  guess = gets.chomp
+  # if guess is wrong
+  # change art
+  puts "Sorry try again"
+  # if guess is right
+  puts "Good guess!"
+  # end guess loop
+end
+
+puts "\nWelcome to our Don't Wake the Cat Guessing Game!"
+puts "Can you guess my word before the cat wakes up?"
+# add art
+
+# if word correct
+puts "Congratulations you won!"
+# if word incorrect
+puts "Sorry the cat is now awake"

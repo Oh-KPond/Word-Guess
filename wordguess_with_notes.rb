@@ -70,18 +70,18 @@ class Art
 
 end
 
-def guess(my_word_instance)
+def guess(game_word)
   puts "I'm in the guess method. I passed in an instance of Word called my_word_instance. This is its value:"
-  puts my_word_instance
+  puts game_word
 
   # start guess loop
   print "Please guess a letter: "
   guess = gets.chomp
 
   puts "I want some letters_array. What is the letters array?"
-  puts my_word_instance.letters_array
+  puts game_word.letters_array
 
-  if my_word_instance.letters_array.include?(guess) # if guess is right
+  if game_word.letters_array.include?(guess) # if guess is right
     puts "Good guess!"
   else # if guess is wrong
     # change art
@@ -89,24 +89,24 @@ def guess(my_word_instance)
   end
 end
 
-my_game = Game.new(["ampers","octos","code","ada"])
+game = Game.new(["ampers","octos","code","ada"])
 
 our_art = Art.new
 print our_art.play_art
 
 puts "\nWelcome to our Don't Wake the Cat Guessing Game!"
 puts "Can you guess my word before the cat wakes up?"
-my_game.choose_word
-p my_game.word.split
-p my_game.word.create_blanks
+game.choose_word
+p game.word.split
+p game.word.create_blanks
 # add art
 
 puts "I have an instance of Game:"
-puts my_game
-puts "My instance of Game called my_game has an instance of word in my_game.word"
-puts my_game.word
+puts game
+puts "My instance of Game called game has an instance of word in game.word"
+puts game.word
 
-guess(my_game.word)
+guess(game.word)
 # if word correct
 puts "Congratulations you won!"
 # if word incorrect

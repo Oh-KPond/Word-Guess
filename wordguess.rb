@@ -1,16 +1,11 @@
 class Word
   def initialize(words_array)
-    @words_array = words_array
-  end
-
-  def random_word
-    @random_word = @words_array.sample
-    return random_word
+    @word = words_array.sample
   end
 
   def split
-    @letters_array = @random_word.split(//)
-    return letters_array
+    @letters_array = @word.split(//)
+    return @letters_array
   end
 
 end
@@ -38,6 +33,13 @@ def guess
   puts "Good guess!"
   # end guess loop
 end
+
+game_words = Word.new(["ampers","octos","code","ada"])
+
+p game_words.split
+
+
+
 
 puts "\nWelcome to our Don't Wake the Cat Guessing Game!"
 puts "Can you guess my word before the cat wakes up?"

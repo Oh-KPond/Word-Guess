@@ -1,11 +1,23 @@
-class Word
-  attr_accessor :word, :letters_array
+class Game
+  attr_accessor :words_array, :word
 
   def initialize(words_array)
-    @word = words_array.sample
+    @words_array = words_array
+  end
+
+  def choose_word
+    @word = Word.new(words_array.sample)
+  end
+
+end
+
+class Word
+  def initialize(word)
+    @word = word
   end
 
   def split
+    # @letters_array = @word
     @letters_array = @word.split(//)
     return @letters_array
   end
@@ -31,12 +43,12 @@ class Art
   end
 end
 
-def guess(game_words)
+def guess(word)
   # start guess loop
   print "Please guess a letter: "
   guess = gets.chomp
 
-  if game_words.letters_array.include?(guess) # if guess is right
+  if word.letters_array.include?(guess) # if guess is right
     puts "Good guess!"
   else # if guess is wrong
     # change art
@@ -44,17 +56,18 @@ def guess(game_words)
   end
 end
 
-game_words = Word.new(["ampers","octos","code","ada"])
+my_game = Game.new(["ampers","octos","code","ada"])
 
-p game_words.split
-p game_words.create_
 
 
 
 puts "\nWelcome to our Don't Wake the Cat Guessing Game!"
 puts "Can you guess my word before the cat wakes up?"
+p my_game.choose_word
+p my_game.word.split
+p my_game.word.create_
 # add art
-guess(game_words)
+# guess(word)
 # if word correct
 puts "Congratulations you won!"
 # if word incorrect

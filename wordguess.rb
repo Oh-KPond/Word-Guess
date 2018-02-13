@@ -12,6 +12,8 @@ class Game
 end
 
 class Word
+  attr_accessor :blanks, :word, :letters_array
+
   def initialize(word)
     @word = word
   end
@@ -22,18 +24,12 @@ class Word
     return @letters_array
   end
 
-  def create_
+  def create_blanks
     blanks = ""
     @letters_array.each do
       blanks += "_ "
     end
     return blanks
-  end
-end
-
-class Letter
-  def initialize(argument)
-    @argument = argument
   end
 end
 
@@ -74,7 +70,7 @@ class Art
 
 end
 
-def guess(word)
+def guess
   # start guess loop
   print "Please guess a letter: "
   guess = gets.chomp
@@ -91,16 +87,16 @@ my_game = Game.new(["ampers","octos","code","ada"])
 
 our_art = Art.new
 print our_art.play_art
-print our_art.end_art
 
 puts "\nWelcome to our Don't Wake the Cat Guessing Game!"
 puts "Can you guess my word before the cat wakes up?"
-p my_game.choose_word
+my_game.choose_word
 p my_game.word.split
-p my_game.word.create_
+p my_game.word.create_blanks
 # add art
-# guess(word)
+# guess
 # if word correct
 puts "Congratulations you won!"
 # if word incorrect
 puts "Sorry the cat is now awake"
+puts our_art.end_art

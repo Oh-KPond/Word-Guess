@@ -8,6 +8,13 @@ class Word
     return @letters_array
   end
 
+  def create_
+    blanks = ""
+    @letters_array.each do
+      blanks += "_ "
+    end
+    return blanks
+  end
 end
 
 class Letter
@@ -37,7 +44,7 @@ end
 game_words = Word.new(["ampers","octos","code","ada"])
 
 p game_words.split
-
+p game_words.create_
 
 
 

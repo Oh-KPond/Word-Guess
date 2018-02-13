@@ -1,38 +1,58 @@
+require "awesome_print"
+
 class Game
-  attr_accessor :words_array, :word
+  attr_accessor :words_array, :word, :guess
 
   def initialize(words_array)
     @words_array = words_array
+    @tries = 5
   end
 
   def choose_word
     @word = Word.new(words_array.sample)
   end
 
+  ## Start Guess Method
+  def guess(letters_array)
+    print "Please guess a letter: "
+    guess = gets.chomp
+
+    if word.letters_array.include?(guess) # if guess is right
+      puts "Good guess!"
+    else # if guess is wrong
+      @tries -= 1
+      # change art
+      puts "Sorry try again."
+      puts "You have #{@tries} left."
+    end
+  end
+  ## End Guess Method
 end
 
+## Start Word Class
 class Word
-  attr_accessor :blanks, :word, :letters_array
+  attr_accessor :blanks, :chosen_word, :letters_array
 
   def initialize(word)
-    @word = word
+    @chosen_word = word
   end
 
   def split
-    # @letters_array = @word
-    @letters_array = @word.split(//)
+    @letters_array = @chosen_word.split(//)
     return @letters_array
   end
 
   def create_blanks
-    blanks = ""
+    blanks = "     "
     @letters_array.each do
       blanks += "_ "
     end
     return blanks
   end
 end
+## End Word Class
 
+## Start Art Class
 class Art
   attr_accessor :art
 
@@ -67,36 +87,43 @@ class Art
      (_/ (_/      ((_/"
   return end_art
   end
-
 end
+## End Art Class
 
-def guess
-  # start guess loop
-  print "Please guess a letter: "
-  guess = gets.chomp
-
-  if word.letters_array.include?(guess) # if guess is right
-    puts "Good guess!"
-  else # if guess is wrong
-    # change art
-    puts "Sorry try again"
-  end
-end
-
-my_game = Game.new(["ampers","octos","code","ada"])
+## Start Game
+game = Game.new(["ampers","octos","code","ada"])
 
 our_art = Art.new
 print our_art.play_art
 
 puts "\nWelcome to our Don't Wake the Cat Guessing Game!"
 puts "Can you guess my word before the cat wakes up?"
-my_game.choose_word
-p my_game.word.split
-p my_game.word.create_blanks
-# add art
-# guess
+game.choose_word # => word from array
+game.word.split
+puts "The word is #{game.word.split.length} letters long."
+puts game.word.create_blanks
+# while word not guessed || tries exahaused
+game.guess(game.word)
+# end
 # if word correct
-puts "Congratulations you won!"
+# puts "Congratulations you won!"
 # if word incorrect
-puts "Sorry the cat is now awake"
-puts our_art.end_art
+# puts "Sorry the cat is now awake"
+# puts our_art.end_art
+
+
+# Welcome to the game
+# Take a guess
+# If guess is incorrect
+#   take away "Z"
+#   subtract 1 from tries
+#   tell user "not included in word"
+# If not out of tries or word not guessed
+# Print image again
+#   list letters guessed incorrectly
+# Ask for guess
+# If guess correct
+#   replace blanks with letters
+# If not out of tries or word not guessed
+# Print image again
+# Ask for guess

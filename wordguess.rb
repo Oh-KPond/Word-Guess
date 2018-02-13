@@ -14,16 +14,18 @@ class Game
 
   ## Start Guess Method
   def guess(letters_array)
-    print "Please guess a letter: "
-    guess = gets.chomp
+    while @tries > 0
+      print "Please guess a letter: "
+      guess = gets.chomp
 
-    if word.letters_array.include?(guess) # if guess is right
-      puts "Good guess!"
-    else # if guess is wrong
-      @tries -= 1
-      # change art
-      puts "Sorry try again."
-      puts "You have #{@tries} left."
+      if word.letters_array.include?(guess) # if guess is right
+        puts "Good guess!"
+      else # if guess is wrong
+        @tries -= 1
+        # change art
+        puts "Sorry try again."
+        puts "You have #{@tries} left."
+      end
     end
   end
   ## End Guess Method
@@ -102,14 +104,12 @@ game.choose_word # => word from array
 game.word.split
 puts "The word is #{game.word.split.length} letters long."
 puts game.word.create_blanks
-# while word not guessed || tries exahaused
 game.guess(game.word)
-# end
 # if word correct
 # puts "Congratulations you won!"
-# if word incorrect
-# puts "Sorry the cat is now awake"
-# puts our_art.end_art
+
+puts "Sorry the cat is now awake"
+puts our_art.end_art
 
 
 # Welcome to the game

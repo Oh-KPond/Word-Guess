@@ -1,7 +1,7 @@
 require "awesome_print"
 
 class Game
-  attr_accessor :words_array, :word, :guess
+  attr_accessor :words_array, :word, :guess, :tries
 
   def initialize(words_array)
     @words_array = words_array
@@ -14,7 +14,7 @@ class Game
 
   ## Start Guess Method
   def guess(letters_array)
-    while @tries > 0
+    while @tries > 0 && word.blanks_array.include?("_")
       print "\nPlease guess a letter: "
       guess = gets.chomp
 
@@ -25,13 +25,7 @@ class Game
             word.blanks_array[i] = guess
           end
         end
-
-        if condition
-          puts "You"
-        end
         p word.blanks_array
-
-        # if blanks array doesn not include blanks exit
       else # if guess is wrong
         @tries -= 1
         # change art
@@ -39,7 +33,7 @@ class Game
         puts "You have #{@tries} left."
       end
     end
-    return false
+    return @tries
   end
   ## End Guess Method
 end
@@ -118,13 +112,12 @@ p game.word.split
 puts "The word is #{game.word.split.length} letters long."
 print "\t#{game.word.create_blanks.join(" ")}"
 game.guess(game.word)
-if !game.guess(game.word)
+if game.tries == 0 # ran out of tries
   puts "\nSorry the cat is now awake"
   puts our_art.end_art
+else # if word correct
+  puts "Congratulations you've guessed the word! You win!"
 end
-# if word correct
-# puts "Congratulations you've guessed the word! You win!"
-
 
 # Welcome to the game
 # Take a guess

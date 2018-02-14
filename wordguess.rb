@@ -16,8 +16,11 @@ class Game
     bad_guesses = []
     while @tries > 0 && word.blanks_array.include?("_")
       puts art.play_art
+      puts "\t#{word.blanks_array.join(" ")}"
       print "\nPlease guess a letter: "
       guess = gets.chomp
+      puts "\n------------------------------------------"
+
 
       if word.letters_array.include?(guess) # if guess is right
         puts "Good guess!"
@@ -27,14 +30,16 @@ class Game
             word.blanks_array[i] = guess
           end
         end
-        puts "#{word.blanks_array.join(" ")}"
       else # if guess is wrong
         @tries -= 1
-        puts "Sorry try again."
+        puts "\nSorry try again."
         puts "You have #{@tries} left."
         bad_guesses << guess
       end
-      puts "\nAlready guessed letters are: \n#{bad_guesses.join(", ")}\n"
+      if bad_guesses.length != 0
+        puts "\nAlready guessed letters are: \n#{bad_guesses.join(", ")}\n"
+      end
+
     end
     return @tries
   end
@@ -115,14 +120,12 @@ Z Z Z Z Z
     game.choose_word # => word from array
     game.word.split  # word split
     puts "The word is #{game.word.split.length} letters long."
-    print "\t#{game.word.create_blanks.join(" ")}"
+    game.word.create_blanks
     game.guess(game.word)
     if game.tries == 0 # ran out of tries
       puts "\nSorry the cat is now awake"
       our_art = Art.new
       puts our_art.end_art
     else # if word correct
-      puts "\nCongratulations you've guessed the word! You win!"
+      puts "\nCongratulations you've guessed the word! You win!\n"
     end
-
-    

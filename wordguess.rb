@@ -20,6 +20,18 @@ class Game
 
       if word.letters_array.include?(guess) # if guess is right
         puts "Good guess!"
+        word.letters_array.length.times do |i|
+          if word.letters_array[i] == guess
+            word.blanks_array[i] = guess
+          end
+        end
+
+        if condition
+          puts "You"
+        end
+        p word.blanks_array
+
+        # if blanks array doesn not include blanks exit
       else # if guess is wrong
         @tries -= 1
         # change art
@@ -34,7 +46,7 @@ end
 
 ## Start Word Class
 class Word
-  attr_accessor :blanks, :chosen_word, :letters_array
+  attr_accessor :blanks_array, :chosen_word, :letters_array
 
   def initialize(word)
     @chosen_word = word
@@ -46,15 +58,11 @@ class Word
   end
 
   def create_blanks
-    blanks = "     "
+    @blanks_array = []
     @letters_array.each do
-      blanks += "_ "
+      @blanks_array << "_"
     end
-    return blanks
-  end
-
-  def replace_blanks
-
+    return @blanks_array
   end
 end
 ## End Word Class
@@ -108,14 +116,14 @@ puts "Can you guess my word before the cat wakes up?"
 game.choose_word # => word from array
 p game.word.split
 puts "The word is #{game.word.split.length} letters long."
-puts game.word.create_blanks
+print "\t#{game.word.create_blanks.join(" ")}"
 game.guess(game.word)
 if !game.guess(game.word)
   puts "\nSorry the cat is now awake"
   puts our_art.end_art
 end
 # if word correct
-# puts "Congratulations you won!"
+# puts "Congratulations you've guessed the word! You win!"
 
 
 # Welcome to the game

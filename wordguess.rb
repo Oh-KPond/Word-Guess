@@ -33,10 +33,10 @@ class Game
       else # if guess is wrong
         @tries -= 1
         puts "\nSorry try again."
-        puts "You have #{@tries} left."
+        puts "You have #{@tries} tries left."
         bad_guesses << guess
       end
-      if bad_guesses.length != 0
+      if bad_guesses.length != 0 && word.blanks_array.include?("_") 
         puts "\nAlready guessed letters are: \n#{bad_guesses.join(", ")}\n"
       end
 
@@ -88,9 +88,9 @@ Z Z Z Z Z
   '---''(_/--'  `-'\\_)"
 
       return @play_art
-    end
+  end
 
-    def end_art
+  def end_art
       @end_art = "
                          _
                         | \\
@@ -108,9 +108,9 @@ Z Z Z Z Z
      (_/ (_/      ((_/"
 
         return @end_art
-      end
-    end
-    ## End Art Class
+  end
+end
+## End Art Class
 
     ## Start Game
     game = Game.new(["ampers","octos","code","ada"])
@@ -127,5 +127,6 @@ Z Z Z Z Z
       our_art = Art.new
       puts our_art.end_art
     else # if word correct
+      puts "\n\t#{game.word.split.join("")}!"
       puts "\nCongratulations you've guessed the word! You win!\n"
     end

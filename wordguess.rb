@@ -14,7 +14,10 @@ class Game
 
   ## Start Guess Method
   def guess(letters_array)
+    art = Art.new
+    bad_guesses = []
     while @tries > 0 && word.blanks_array.include?("_")
+      puts art.play_art
       print "\nPlease guess a letter: "
       guess = gets.chomp
 
@@ -31,7 +34,9 @@ class Game
         # change art
         puts "Sorry try again."
         puts "You have #{@tries} left."
+        bad_guesses << guess
       end
+      puts "\nAlready guessed letters are: \n#{bad_guesses.join(", ")}\n"
     end
     return @tries
   end
@@ -63,23 +68,23 @@ end
 
 ## Start Art Class
 class Art
-  attr_accessor :art
+  attr_accessor :art,
 
   def initialize
     @art = art
   end
 
   def play_art
-    play_art = "
+    @play_art = "
       |\\    _,,,---,,_
       /,`.-'`'    -.  ;-;;,_
       |,4-  ) )-,_..;\\(  `'-'
       '---''(_/--'  `-'\\_)"
-    return play_art
+    return @play_art
   end
 
   def end_art
-  end_art = "
+  @end_art = "
                          _
                         | \\
                         | |
@@ -94,16 +99,13 @@ class Art
       | | \\        || |
       | |\\ \\       || )
      (_/ (_/      ((_/"
-  return end_art
+  return @end_art
   end
 end
 ## End Art Class
 
 ## Start Game
 game = Game.new(["ampers","octos","code","ada"])
-
-our_art = Art.new
-# print our_art.play_art
 
 puts "\nWelcome to our Don't Wake the Cat Guessing Game!"
 puts "Can you guess my word before the cat wakes up?"
@@ -114,6 +116,7 @@ print "\t#{game.word.create_blanks.join(" ")}"
 game.guess(game.word)
 if game.tries == 0 # ran out of tries
   puts "\nSorry the cat is now awake"
+  our_art = Art.new
   puts our_art.end_art
 else # if word correct
   puts "Congratulations you've guessed the word! You win!"

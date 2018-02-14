@@ -15,7 +15,7 @@ class Game
   ## Start Guess Method
   def guess(letters_array)
     while @tries > 0
-      print "Please guess a letter: "
+      print "\nPlease guess a letter: "
       guess = gets.chomp
 
       if word.letters_array.include?(guess) # if guess is right
@@ -27,6 +27,7 @@ class Game
         puts "You have #{@tries} left."
       end
     end
+    return false
   end
   ## End Guess Method
 end
@@ -50,6 +51,10 @@ class Word
       blanks += "_ "
     end
     return blanks
+  end
+
+  def replace_blanks
+
   end
 end
 ## End Word Class
@@ -96,20 +101,21 @@ end
 game = Game.new(["ampers","octos","code","ada"])
 
 our_art = Art.new
-print our_art.play_art
+# print our_art.play_art
 
 puts "\nWelcome to our Don't Wake the Cat Guessing Game!"
 puts "Can you guess my word before the cat wakes up?"
 game.choose_word # => word from array
-game.word.split
+p game.word.split
 puts "The word is #{game.word.split.length} letters long."
 puts game.word.create_blanks
 game.guess(game.word)
+if !game.guess(game.word)
+  puts "\nSorry the cat is now awake"
+  puts our_art.end_art
+end
 # if word correct
 # puts "Congratulations you won!"
-
-puts "Sorry the cat is now awake"
-puts our_art.end_art
 
 
 # Welcome to the game

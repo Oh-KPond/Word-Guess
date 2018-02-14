@@ -1,5 +1,3 @@
-require "awesome_print"
-
 class Game
   attr_accessor :words_array, :word, :guess, :tries
 
@@ -23,15 +21,15 @@ class Game
 
       if word.letters_array.include?(guess) # if guess is right
         puts "Good guess!"
+        # finding blanks and replacing them with the guess
         word.letters_array.length.times do |i|
           if word.letters_array[i] == guess
             word.blanks_array[i] = guess
           end
         end
-        p word.blanks_array
+        puts "#{word.blanks_array.join(" ")}"
       else # if guess is wrong
         @tries -= 1
-        # change art
         puts "Sorry try again."
         puts "You have #{@tries} left."
         bad_guesses << guess
@@ -68,7 +66,7 @@ end
 
 ## Start Art Class
 class Art
-  attr_accessor :art,
+  attr_accessor :art
 
   def initialize
     @art = art
@@ -76,15 +74,19 @@ class Art
 
   def play_art
     @play_art = "
-      |\\    _,,,---,,_
-      /,`.-'`'    -.  ;-;;,_
-      |,4-  ) )-,_..;\\(  `'-'
-      '---''(_/--'  `-'\\_)"
-    return @play_art
-  end
 
-  def end_art
-  @end_art = "
+Z Z Z Z Z
+
+  |\\      _,,,---,,_
+  /,`.-'`'    -.  ;-;;,_
+  |,4-  ) )-,_..;\\ (  `'-'
+  '---''(_/--'  `-'\\_)"
+
+      return @play_art
+    end
+
+    def end_art
+      @end_art = "
                          _
                         | \\
                         | |
@@ -99,41 +101,28 @@ class Art
       | | \\        || |
       | |\\ \\       || )
      (_/ (_/      ((_/"
-  return @end_art
-  end
-end
-## End Art Class
 
-## Start Game
-game = Game.new(["ampers","octos","code","ada"])
+        return @end_art
+      end
+    end
+    ## End Art Class
 
-puts "\nWelcome to our Don't Wake the Cat Guessing Game!"
-puts "Can you guess my word before the cat wakes up?"
-game.choose_word # => word from array
-p game.word.split
-puts "The word is #{game.word.split.length} letters long."
-print "\t#{game.word.create_blanks.join(" ")}"
-game.guess(game.word)
-if game.tries == 0 # ran out of tries
-  puts "\nSorry the cat is now awake"
-  our_art = Art.new
-  puts our_art.end_art
-else # if word correct
-  puts "Congratulations you've guessed the word! You win!"
-end
+    ## Start Game
+    game = Game.new(["ampers","octos","code","ada"])
 
-# Welcome to the game
-# Take a guess
-# If guess is incorrect
-#   take away "Z"
-#   subtract 1 from tries
-#   tell user "not included in word"
-# If not out of tries or word not guessed
-# Print image again
-#   list letters guessed incorrectly
-# Ask for guess
-# If guess correct
-#   replace blanks with letters
-# If not out of tries or word not guessed
-# Print image again
-# Ask for guess
+    puts "\nWelcome to our Don't Wake the Cat Guessing Game!"
+    puts "Can you guess my word before the cat wakes up?"
+    game.choose_word # => word from array
+    game.word.split  # word split
+    puts "The word is #{game.word.split.length} letters long."
+    print "\t#{game.word.create_blanks.join(" ")}"
+    game.guess(game.word)
+    if game.tries == 0 # ran out of tries
+      puts "\nSorry the cat is now awake"
+      our_art = Art.new
+      puts our_art.end_art
+    else # if word correct
+      puts "\nCongratulations you've guessed the word! You win!"
+    end
+
+    
